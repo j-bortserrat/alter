@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>L'Alter · Paelles a la llenya des de 1967 · Picassent</title>
+<meta name="description" content="Restaurant L'Alter — paellas a la leña con arroz Bahía desde 1967 en Picassent, València. De Picassent al món." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #100a05;
+    --bg-2: #1a110a;
+    --bg-3: #241710;
+    --cream: #f3e7cf;
+    --cream-soft: #d9c9a6;
+    --muted: #a89373;
+    --saffron: #d98b2b;
+    --ember: #b8421a;
+    --wine: #7a2419;
+    --gold: #c69749;
+    --border: rgba(214, 184, 124, 0.18);
+    --max: 1240px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--ember), var(--saffron)); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--saffron); }
+
+  ::selection { background: var(--saffron); color: var(--bg); }
+
+  /* Typography helpers */
+  .serif { font-family: 'Cormorant Garamond', 'Times New Roman', serif; }
+  .script { font-family: 'Caveat', cursive; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 22px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.4s cubic-bezier(.2,.8,.2,1);
+    background: transparent;
+  }
+  .nav.scrolled {
+    background: rgba(16, 10, 5, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 14px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--saffron); font-style: italic; }
+  .nav-links {
+    display: flex; gap: 38px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -6px; left: 0;
+    width: 0; height: 1px;
+    background: var(--saffron);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--saffron);
+    color: var(--bg);
+    padding: 11px 22px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    border: 1px solid var(--saffron);
+  }
+  .nav-cta:hover {
+    background: transparent;
+    color: var(--saffron);
+    transform: translateY(-2px);
+  }
+  .menu-toggle {
+    display: none;
+    background: none; border: none; color: var(--cream);
+    font-size: 24px; cursor: pointer;
+  }
+  .mobile-menu { display: none; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background-color: #0a0604;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(180deg, rgba(10,6,4,0.55) 0%, rgba(10,6,4,0.65) 50%, rgba(10,6,4,0.85) 100%),
+      url("assets/hero-paellas.png");
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transform: scale(1.05);
+    will-change: transform;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, rgba(217,139,43,0.5), transparent),
+      radial-gradient(1px 1px at 60% 70%, rgba(217,139,43,0.4), transparent),
+      radial-gradient(2px 2px at 80% 20%, rgba(198,151,73,0.5), transparent),
+      radial-gradient(1px 1px at 30% 90%, rgba(217,139,43,0.4), transparent),
+      radial-gradient(2px 2px at 90% 50%, rgba(184,66,26,0.6), transparent),
+      radial-gradient(1px 1px at 50% 40%, rgba(217,139,43,0.3), transparent);
+    background-size: 800px 800px;
+    animation: emberFloat 22s linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes emberFloat {
+    0%   { transform: translate(0, 0); }
+    50%  { transform: translate(-40px, -60px); }
+    100% { transform: translate(0, 0); }
+  }
+  .hero-grain {
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.6  0 0 0 0 0.2  0 0 0 0.08 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 1100px;
+    padding: 120px 28px 60px;
+  }
+  .hero-eyebrow {
+    font-family: 'Caveat', cursive;
+    color: var(--saffron);
+    font-size: 28px;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+    opacity: 0; transform: translateY(20px);
+    animation: rise 1s 0.2s ease forwards;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4.5rem, 14vw, 11.5rem);
+    font-weight: 500;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 24px;
+    opacity: 0; transform: translateY(40px);
+    animation: rise 1.2s 0.4s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .hero h1 .ital { font-style: italic; color: var(--saffron); }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+    color: var(--cream-soft);
+    max-width: 720px;
+    margin: 0 auto 18px;
+    line-height: 1.5;
+    opacity: 0; transform: translateY(20px);
+    animation: rise 1s 0.8s ease forwards;
+  }
+  .hero-since {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin: 26px 0 38px;
+    opacity: 0;
+    animation: fadeIn 1s 1.1s ease forwards;
+  }
+  .hero-since::before, .hero-since::after {
+    content: ''; width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+  }
+  .hero-cta {
+    display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1s 1.3s ease forwards;
+  }
+  .btn {
+    display: inline-block;
+    padding: 16px 34px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.4s;
+    cursor: pointer;
+    border: 1px solid;
+  }
+  .btn-primary {
+    background: var(--saffron);
+    color: var(--bg);
+    border-color: var(--saffron);
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--saffron);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -20px rgba(217,139,43,0.5);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+  .btn-ghost:hover {
+    background: var(--cream);
+    color: var(--bg);
+    transform: translateY(-3px);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeIn 1s 2s ease forwards;
+  }
+  .scroll-indicator::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(180deg, var(--saffron), transparent);
+    margin: 14px auto 0;
+    animation: scrollBob 2s ease-in-out infinite;
+  }
+  @keyframes scrollBob {
+    0%, 100% { transform: scaleY(0.4); transform-origin: top; }
+    50% { transform: scaleY(1); }
+  }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* ---------- SECTIONS GENERAL ---------- */
+  section {
+    padding: 140px 40px;
+    position: relative;
+  }
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .section-eyebrow {
+    font-family: 'Caveat', cursive;
+    color: var(--saffron);
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+  .section-title .ital { font-style: italic; color: var(--saffron); }
+  .section-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--saffron);
+    margin-bottom: 28px;
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-left { transform: translateX(-40px); }
+  .reveal-left.in { transform: translateX(0); }
+  .reveal-right { transform: translateX(40px); }
+  .reveal-right.in { transform: translateX(0); }
+
+  /* ---------- HISTORIA ---------- */
+  .historia {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  }
+  .historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .historia-text p {
+    color: var(--cream-soft);
+    font-size: 17px;
+    line-height: 1.85;
+    margin-bottom: 22px;
+    font-weight: 300;
+  }
+  .historia-text p:first-of-type::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5em;
+    float: left;
+    line-height: 0.85;
+    margin-right: 12px;
+    margin-top: 6px;
+    color: var(--saffron);
+    font-style: italic;
+  }
+  .historia-image {
+    position: relative;
+    aspect-ratio: 3/4;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.7);
+  }
+  .historia-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+  }
+  .historia-image:hover img { transform: scale(1.04); }
+  .historia-image .frame-line {
+    position: absolute; inset: 16px;
+    border: 1px solid rgba(243,231,207,0.25);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* ---------- STATS ---------- */
+  .stats {
+    background: var(--bg-2);
+    padding: 100px 40px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 500;
+    color: var(--saffron);
+    line-height: 1;
+    display: block;
+  }
+  .stat-num .plus { color: var(--cream); font-size: 0.7em; }
+  .stat-label {
+    margin-top: 10px;
+    color: var(--cream-soft);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- QUOTE / NYT ---------- */
+  .quote {
+    padding: 160px 40px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at center, rgba(184,66,26,0.18) 0%, transparent 70%),
+      var(--bg);
+    position: relative;
+  }
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    color: var(--saffron);
+    line-height: 0;
+    opacity: 0.35;
+    height: 60px;
+    margin-bottom: 0;
+  }
+  .quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.6rem, 3.4vw, 2.8rem);
+    line-height: 1.35;
+    color: var(--cream);
+    max-width: 900px;
+    margin: 0 auto 30px;
+    font-weight: 400;
+  }
+  .quote-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--cream-soft);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .quote-source::before {
+    content: ''; width: 30px; height: 1px;
+    background: var(--saffron);
+  }
+
+  /* ---------- CARTA ---------- */
+  .carta {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-3) 50%, var(--bg) 100%);
+  }
+  .carta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 70px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .carta-header p {
+    color: var(--cream-soft);
+    max-width: 420px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .carta-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+  .cat-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--cream-soft);
+    padding: 12px 22px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  .cat-btn:hover {
+    color: var(--saffron);
+    border-color: var(--saffron);
+  }
+  .cat-btn.active {
+    background: var(--saffron);
+    color: var(--bg);
+    border-color: var(--saffron);
+  }
+  .carta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 70px;
+  }
+  .dish {
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 22px;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .dish:hover {
+    border-bottom-color: var(--saffron);
+    transform: translateX(4px);
+  }
+  .dish-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 6px;
+  }
+  .dish-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--cream);
+    font-weight: 500;
+    flex: 1;
+  }
+  .dish-price {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--saffron);
+    font-size: 20px;
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .dish-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .dish.feature {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px;
+    background: rgba(217,139,43,0.04);
+    position: relative;
+  }
+  .dish.feature::before {
+    content: 'Especialidad';
+    position: absolute;
+    top: -10px; left: 18px;
+    background: var(--saffron);
+    color: var(--bg);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: 700;
+    border-radius: 2px;
+  }
+  .carta-note {
+    margin-top: 56px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ---------- PROCESO / LEÑA ---------- */
+  .proceso {
+    padding: 140px 40px;
+    background: var(--bg);
+    overflow: hidden;
+    position: relative;
+  }
+  .proceso-photo {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(180deg, rgba(16,10,5,0.88) 0%, rgba(16,10,5,0.78) 50%, rgba(16,10,5,0.92) 100%),
+      url("assets/llamas.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 0;
+    will-change: transform;
+  }
+  @media (max-width: 960px) {
+    .proceso-photo { background-attachment: scroll; }
+  }
+  .proceso-bg {
+    position: absolute;
+    top: 50%; right: -200px;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(12rem, 25vw, 22rem);
+    color: rgba(217,139,43,0.06);
+    pointer-events: none;
+    line-height: 0.8;
+    z-index: 1;
+    white-space: nowrap;
+  }
+  .proceso .container { position: relative; z-index: 1; }
+  .proceso-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    margin-top: 70px;
+  }
+  .step {
+    position: relative;
+    padding-top: 30px;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 80px;
+    line-height: 0.8;
+    color: var(--saffron);
+    opacity: 0.6;
+    margin-bottom: 18px;
+  }
+  .step h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 14px;
+  }
+  .step p {
+    color: var(--cream-soft);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* ---------- GALERÍA SUTIL (tira) ---------- */
+  .galeria-subtle {
+    padding: 30px 0 60px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .gal-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+  }
+  .gal-cell {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    position: relative;
+  }
+  .gal-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.35) brightness(0.78) saturate(0.85);
+    transition: filter 0.6s cubic-bezier(.2,.8,.2,1), transform 0.9s cubic-bezier(.2,.8,.2,1);
+  }
+  .gal-cell:hover img {
+    filter: grayscale(0) brightness(1) saturate(1.05);
+    transform: scale(1.06);
+  }
+  @media (max-width: 720px) {
+    .gal-strip { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ---------- GALERÍA MOSAICO (legado) ---------- */
+  .galeria {
+    padding: 140px 0 140px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .galeria-header {
+    text-align: center;
+    margin-bottom: 70px;
+    padding: 0 40px;
+  }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 120px;
+    gap: 14px;
+    padding: 0 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .gal-item {
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .gal-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.9s cubic-bezier(.2,.8,.2,1), filter 0.5s;
+    filter: brightness(0.9) saturate(0.95);
+  }
+  .gal-item:hover img {
+    transform: scale(1.08);
+    filter: brightness(1.05) saturate(1.1);
+  }
+  .gal-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(16,10,5,0.7) 100%);
+    pointer-events: none;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+  }
+  .gal-item:hover::after { opacity: 1; }
+  .gal-item .gal-label {
+    position: absolute;
+    bottom: 18px; left: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--cream);
+    font-size: 20px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s;
+  }
+  .gal-item:hover .gal-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .gal-1 { grid-column: span 7; grid-row: span 4; }
+  .gal-2 { grid-column: span 5; grid-row: span 2; }
+  .gal-3 { grid-column: span 5; grid-row: span 2; }
+  .gal-4 { grid-column: span 4; grid-row: span 3; }
+  .gal-5 { grid-column: span 4; grid-row: span 3; }
+  .gal-6 { grid-column: span 4; grid-row: span 3; }
+  @media (max-width: 960px) {
+    .galeria-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 180px;
+      padding: 0 20px;
+      gap: 10px;
+    }
+    .gal-1, .gal-2, .gal-3, .gal-4, .gal-5, .gal-6 { grid-column: span 1; grid-row: span 1; }
+    .gal-1 { grid-column: span 2; }
+  }
+
+  /* ---------- SMOKE / DYNAMISM ---------- */
+  .smoke {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .smoke span {
+    position: absolute;
+    bottom: -200px;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(243,231,207,0.06) 0%, rgba(243,231,207,0.03) 35%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(28px);
+    animation: smokeRise 16s linear infinite;
+    opacity: 0;
+  }
+  .smoke span:nth-child(1) { left: 5%;  animation-delay: 0s;  animation-duration: 18s; }
+  .smoke span:nth-child(2) { left: 25%; animation-delay: 3s;  animation-duration: 22s; }
+  .smoke span:nth-child(3) { left: 45%; animation-delay: 6s;  animation-duration: 20s; }
+  .smoke span:nth-child(4) { left: 60%; animation-delay: 9s;  animation-duration: 24s; }
+  .smoke span:nth-child(5) { left: 78%; animation-delay: 12s; animation-duration: 19s; }
+  .smoke span:nth-child(6) { left: 90%; animation-delay: 4s;  animation-duration: 21s; }
+  @keyframes smokeRise {
+    0%   { transform: translateY(0) translateX(0) scale(0.6); opacity: 0; }
+    10%  { opacity: 0.5; }
+    50%  { transform: translateY(-60vh) translateX(40px) scale(1.4); opacity: 0.45; }
+    100% { transform: translateY(-120vh) translateX(-30px) scale(2.2); opacity: 0; }
+  }
+
+  /* Fade-in image as soon as it loads */
+  img { opacity: 0; transition: opacity 0.6s ease; }
+  img.loaded, img[data-loaded] { opacity: 1; }
+
+  /* Subtle pulsing CTA */
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(217,139,43,0.5); }
+    50%      { box-shadow: 0 0 0 16px rgba(217,139,43,0); }
+  }
+  .btn-primary { animation: pulse-glow 2.6s ease-in-out infinite; }
+  .btn-primary:hover { animation: none; }
+
+  /* Section divider with rising smoke between sections */
+  .section-smoke-divider {
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+    margin-top: -40px;
+    margin-bottom: -40px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .section-smoke-divider::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 100%, rgba(243,231,207,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 100%, rgba(243,231,207,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 100%, rgba(243,231,207,0.09) 0%, transparent 50%);
+    filter: blur(20px);
+    animation: smokeDrift 14s ease-in-out infinite;
+  }
+  @keyframes smokeDrift {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(40px); }
+  }
+
+  /* ---------- RESERVA CTA ---------- */
+  .reserva-cta {
+    padding: 160px 40px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at center, rgba(184,66,26,0.25) 0%, transparent 60%),
+      linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .reserva-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 30% 40%, rgba(217,139,43,0.5), transparent),
+      radial-gradient(1px 1px at 70% 60%, rgba(217,139,43,0.4), transparent),
+      radial-gradient(2px 2px at 50% 20%, rgba(184,66,26,0.5), transparent);
+    background-size: 600px 600px;
+    animation: emberFloat 18s linear infinite reverse;
+    opacity: 0.5;
+  }
+  .reserva-cta .container { position: relative; z-index: 1; }
+  .reserva-cta .section-title { max-width: 800px; margin-left: auto; margin-right: auto; }
+  .reserva-cta p {
+    color: var(--cream-soft);
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contacto {
+    padding: 140px 40px 80px;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+  }
+  .contacto-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+  }
+  .info-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-top: 70px;
+    padding-top: 50px;
+    border-top: 1px solid var(--border);
+  }
+  .info-col .info-label {
+    margin-bottom: 14px;
+    font-size: 10px;
+  }
+  .info-col .info-value {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .info-col .info-value small {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--cream-soft);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+  .info-block {
+    margin-bottom: 38px;
+  }
+  .info-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 10px;
+  }
+  .info-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--cream);
+    line-height: 1.4;
+  }
+  .info-value a {
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+  }
+  .info-value a:hover {
+    color: var(--saffron);
+    border-bottom-color: var(--saffron);
+  }
+  .map-frame {
+    aspect-ratio: 4/5;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .map-frame iframe {
+    width: 100%; height: 100%; border: 0; filter: grayscale(0.6) brightness(0.85);
+  }
+  .contacto-head {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .map-wide {
+    width: 100%;
+    aspect-ratio: 21/7;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-3);
+    margin-bottom: 50px;
+  }
+  .map-wide iframe {
+    width: 100%; height: 100%; border: 0;
+    filter: grayscale(0.55) brightness(0.85) contrast(1.05);
+  }
+  @media (max-width: 720px) {
+    .map-wide { aspect-ratio: 4/3; }
+  }
+  @media (max-width: 960px) {
+    .info-bar { grid-template-columns: 1fr 1fr; gap: 30px; padding-top: 36px; margin-top: 50px; }
+  }
+  @media (max-width: 560px) {
+    .info-bar { grid-template-columns: 1fr; gap: 26px; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg);
+    padding: 60px 40px 40px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    color: var(--cream);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .footer-logo .ital { color: var(--saffron); font-style: italic; }
+  .footer-tag {
+    font-family: 'Caveat', cursive;
+    color: var(--saffron);
+    font-size: 22px;
+    margin-bottom: 36px;
+  }
+  .footer-bottom {
+    display: flex; justify-content: space-between;
+    color: var(--muted); font-size: 12px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 24px;
+    transition: color 0.3s;
+  }
+  .footer-bottom a:hover { color: var(--saffron); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 960px) {
+    .nav { padding: 16px 22px; }
+    .nav.scrolled { padding: 12px 22px; }
+    .nav-links, .nav-cta { display: none; }
+    .menu-toggle { display: block; }
+    .mobile-menu {
+      display: flex;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(16,10,5,0.97);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 30px;
+      transform: translateY(-100%);
+      transition: transform 0.5s cubic-bezier(.7,0,.3,1);
+    }
+    .mobile-menu.open { transform: translateY(0); }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .mobile-menu a:hover { color: var(--saffron); }
+
+    section { padding: 90px 24px; }
+    .historia-grid { grid-template-columns: 1fr; gap: 50px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 50px 30px; }
+    .carta-grid { grid-template-columns: 1fr; gap: 26px; }
+    .proceso-steps { grid-template-columns: 1fr; gap: 40px; }
+    .contacto-grid { grid-template-columns: 1fr; gap: 50px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .footer-bottom a { margin: 0 12px; }
+    .hero-inner { padding: 100px 22px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-logo">L<span>'</span>Alter</a>
+  <ul class="nav-links">
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://www.covermanager.com/reserve/module_restaurant/restaurante-larte/spanish" target="_blank" rel="noopener" class="nav-cta">Reservar</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#historia">Historia</a>
+  <a href="#carta">Carta</a>
+  <a href="#contacto">Contacto</a>
+  <a href="https://www.covermanager.com/reserve/module_restaurant/restaurante-larte/spanish" target="_blank" rel="noopener" style="color:var(--saffron)">Reservar</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grain"></div>
+  <div class="smoke" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">De Picassent al món</div>
+    <h1>L<span class="ital">'</span>Alter</h1>
+    <p class="hero-sub">Fent paelles des de 1967 amb llenya de taronger, garrofera i arròs Bahia. El nostre secret: cuina tradicional amb temps i qualitat.</p>
+    <div class="hero-since">Picassent · València · Lunes a domingo 13:30 — 15:30h</div>
+    <div class="hero-cta">
+      <a href="https://www.covermanager.com/reserve/module_restaurant/restaurante-larte/spanish" target="_blank" rel="noopener" class="btn btn-primary">Reserva tu mesa</a>
+      <a href="#carta" class="btn btn-ghost">Ver la carta</a>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section class="historia" id="historia">
+  <div class="container">
+    <div class="historia-grid">
+      <div class="historia-text reveal reveal-left">
+        <div class="section-eyebrow">Nuestra historia</div>
+        <h2 class="section-title">Desde <span class="ital">1967</span></h2>
+        <div class="section-divider"></div>
+        <p>L'Alter es el proyecto de los abuelos Juliet y Amparo, desde 1967. Primero un merendero al aire libre, junto a los caminos de algarrobos en lo alto de un altero de Picassent. Con el tiempo, creció hasta ser un restaurante.</p>
+        <p>Somos la receta de una generación, que aplica la misma lección que entonces: una cocina tradicional que requiere tiempo y calidad.</p>
+        <p>Hacemos los arroces como nuestros antepasados: con leña de naranjo y algarrobo cortada y dejada secar hasta dos años. Así conseguimos controlar la velocidad del fuego y aromatizar el arroz.</p>
+      </div>
+      <div class="historia-image reveal reveal-right">
+        <img src="assets/historia-lena-bw.png" alt="Cargando la leña — L'Alter desde 1967">
+        <div class="frame-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote reveal">
+  <div class="container">
+    <div class="quote-mark">"</div>
+    <blockquote>
+      La mejor paella que pude encontrar estaba fuera de la ciudad, en un pueblo llamado Picassent.
+    </blockquote>
+    <div class="quote-source">Mark Bittman · The New York Times</div>
+  </div>
+</section>
+
+<!-- GALERÍA SUTIL -->
+<section class="galeria-subtle">
+  <div class="gal-strip reveal">
+    <div class="gal-cell"><img src="assets/hero-paellas.png" alt="" loading="lazy"></div>
+    <div class="gal-cell"><img src="assets/bogavante.png" alt="" loading="lazy"></div>
+    <div class="gal-cell"><img src="assets/proceso-cocinero.png" alt="" loading="lazy"></div>
+    <div class="gal-cell"><img src="assets/paella-valenciana.png" alt="" loading="lazy"></div>
+    <div class="gal-cell"><img src="assets/paellas-apiladas.png" alt="" loading="lazy"></div>
+    <div class="gal-cell"><img src="assets/arroz-al-horno.png" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section class="carta" id="carta">
+  <div class="container">
+    <div class="carta-header reveal">
+      <div>
+        <div class="section-eyebrow">Nuestra carta</div>
+        <h2 class="section-title">Cocina <span class="ital">de siempre</span></h2>
+        <div class="section-divider"></div>
+      </div>
+    </div>
+
+    <div class="carta-categories reveal">
+      <button class="cat-btn active" data-cat="lena">Arroces a la leña</button>
+      <button class="cat-btn" data-cat="cocina">Arroces de cocina</button>
+      <button class="cat-btn" data-cat="entrantes">Entrantes</button>
+      <button class="cat-btn" data-cat="carnes">Carnes</button>
+      <button class="cat-btn" data-cat="pescados">Pescados</button>
+      <button class="cat-btn" data-cat="postres">Postres</button>
+    </div>
+
+    <!-- LEÑA -->
+    <div class="carta-grid reveal" data-content="lena">
+      <div class="dish feature">
+        <div class="dish-head"><div class="dish-name">Paella de Pollo y Conejo</div><div class="dish-price">17,00 €</div></div>
+        <div class="dish-desc">La paella valenciana de toda la vida. Cocinada al fuego de naranjo y algarrobo.</div>
+      </div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella Doble de Conejo</div><div class="dish-price">18,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella de Marisco</div><div class="dish-price">18,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella de Pollo y Marisco</div><div class="dish-price">19,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella de Pollo, Conejo y Marisco</div><div class="dish-price">20,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella de Bogavante</div><div class="dish-price">22,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella solo de Pollo</div><div class="dish-price">17,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella solo de Conejo</div><div class="dish-price">18,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Fidefoie</div><div class="dish-price">22,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Arroz Negro</div><div class="dish-price">17,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paella de Verduras</div><div class="dish-price">17,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Arroz Senyoret</div><div class="dish-price">17,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Fideuà de Marisco</div><div class="dish-price">18,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Suplemento Alcachofas</div><div class="dish-price">1,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Suplemento Caracoles</div><div class="dish-price">1,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Suplemento Pato</div><div class="dish-price">1,00 €</div></div></div>
+    </div>
+
+    <!-- COCINA -->
+    <div class="carta-grid reveal" data-content="cocina" style="display:none">
+      <div class="dish"><div class="dish-head"><div class="dish-name">Arroz al Horno</div><div class="dish-price">17,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Fesols i Naps</div><div class="dish-price">19,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Arroz Meloso de Bogavante</div><div class="dish-price">22,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Arroz Meloso de Pato y Setas</div><div class="dish-price">18,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Arroz Meloso de Mariscos</div><div class="dish-price">18,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Arroz Meloso de Pollo y Conejo</div><div class="dish-price">17,50 €</div></div></div>
+    </div>
+
+    <!-- ENTRANTES -->
+    <div class="carta-grid reveal" data-content="entrantes" style="display:none">
+      <div class="dish"><div class="dish-head"><div class="dish-name">Calamar Andaluza</div><div class="dish-price">15,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Chipirones</div><div class="dish-price">16,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Sepia Plancha</div><div class="dish-price">17,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Sepionet</div><div class="dish-price">17,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Croquetas de Bacalao</div><div class="dish-price">2,00 € / ud</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Croqueta de Jamón</div><div class="dish-price">2,25 € / ud</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Croquetas de Boletus</div><div class="dish-price">2,25 € / ud</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Croquetas de Rabo de Toro</div><div class="dish-price">3,50 € / ud</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Pulpo a la brasa con parmentier de boniato</div><div class="dish-price">23,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Alcachofas con salsa de boletus y foie</div><div class="dish-price">24,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Jamón Ibérico</div><div class="dish-price">25,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Jamón Ibérico y Queso Manchego</div><div class="dish-price">20,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Queso Manchego</div><div class="dish-price">13,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Mojama</div><div class="dish-price">17,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Esgarraet</div><div class="dish-price">15,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Sardinas Ahumadas</div><div class="dish-price">4,00 € / ud</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Anchoas Caseras</div><div class="dish-price">4,00 € / ud</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Ensalada Valenciana</div><div class="dish-price">10,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Almendras</div><div class="dish-price">5,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Aceitunas Rellenas</div><div class="dish-price">3,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Olivas</div><div class="dish-price">3,00 €</div></div></div>
+    </div>
+
+    <!-- CARNES -->
+    <div class="carta-grid reveal" data-content="carnes" style="display:none">
+      <div class="dish"><div class="dish-head"><div class="dish-name">Entrecot</div><div class="dish-price">26,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Solomillo</div><div class="dish-price">27,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Chuletón 1 kg</div><div class="dish-price">65,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Chuletón 1/2 kg</div><div class="dish-price">45,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Paletilla de Cordero</div><div class="dish-price">45,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">1/2 Paletilla de Cordero</div><div class="dish-price">30,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Chuletas de Cordero</div><div class="dish-price">18,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Conejo al Ajillo</div><div class="dish-price">20,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Pollo</div><div class="dish-price">12,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Suplemento Roquefort</div><div class="dish-price">1,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Suplemento Pimienta</div><div class="dish-price">1,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Suplemento A la brasa</div><div class="dish-price">3,00 €</div></div></div>
+    </div>
+
+    <!-- PESCADOS -->
+    <div class="carta-grid reveal" data-content="pescados" style="display:none">
+      <div class="dish"><div class="dish-head"><div class="dish-name">Rodaballo</div><div class="dish-price">28,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Lenguado Plancha</div><div class="dish-price">27,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Emperador Plancha</div><div class="dish-price">25,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Sepionet</div><div class="dish-price">17,00 €</div></div></div>
+    </div>
+
+    <!-- POSTRES -->
+    <div class="carta-grid reveal" data-content="postres" style="display:none">
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tarta de Whisky</div><div class="dish-price">7,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Crocanti (Butano)</div><div class="dish-price">7,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tarta Carolina</div><div class="dish-price">5,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tarta Crocanti</div><div class="dish-price">5,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tarta de Chocolate</div><div class="dish-price">6,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tarta de Limón</div><div class="dish-price">6,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tarta de Queso</div><div class="dish-price">6,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tarta de Lotus</div><div class="dish-price">6,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Tiramisú</div><div class="dish-price">6,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Turrón</div><div class="dish-price">6,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Flan de Huevo</div><div class="dish-price">5,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Flan de Café</div><div class="dish-price">5,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Flan con Nata</div><div class="dish-price">5,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Calabaza al Horno</div><div class="dish-price">6,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Calabaza con Miel o Nata</div><div class="dish-price">6,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Fresas con Nata o Zumo</div><div class="dish-price">6,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Naranja Preparada</div><div class="dish-price">6,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Piña Natural</div><div class="dish-price">6,00 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Zumo de Naranja</div><div class="dish-price">5,50 €</div></div></div>
+      <div class="dish"><div class="dish-head"><div class="dish-name">Fruta del Tiempo</div><div class="dish-price">4,00 €</div></div></div>
+    </div>
+
+    <div class="carta-note reveal">Encargos de paellas y arroces a la leña todos los días hasta las 15:30h</div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="proceso-photo"></div>
+  <div class="proceso-bg">llenya</div>
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width: 800px; margin: 0 auto;">
+      <div class="section-eyebrow">Cómo cocinamos</div>
+      <h2 class="section-title">El secreto está <span class="ital">en la leña</span></h2>
+      <div class="section-divider" style="margin: 0 auto 28px;"></div>
+    </div>
+    <div class="proceso-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Naranjo y garrofera</h3>
+        <p>Solo usamos leña de naranjo y algarrobo de los campos de la zona. Cada tronco se selecciona y se deja secar hasta dos años antes de llegar al fuego.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3>Arroz Bahía</h3>
+        <p>Variedad redonda valenciana que absorbe los sabores sin pasarse. Cada grano queda suelto, en su punto exacto. Ni un segundo más.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>Fuego vivo</h3>
+        <p>La paella se hace a fuego vivo, sin atajos. El humo del naranjo perfuma el sofrito y crea el socarrat que la define. Cocinar bien es cuestión de tiempo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="container">
+    <div class="contacto-head reveal">
+      <div class="section-eyebrow">Visítanos</div>
+      <h2 class="section-title">Info y <span class="ital">reservas</span></h2>
+      <div class="section-divider" style="margin: 0 auto 36px;"></div>
+      <a href="https://www.covermanager.com/reserve/module_restaurant/restaurante-larte/spanish" target="_blank" rel="noopener" class="btn btn-primary">Reservar online</a>
+    </div>
+
+    <div class="map-wide reveal">
+      <iframe src="https://maps.google.com/maps?q=Carrer%20Ca%20Juliet%203%20Picassent&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="info-bar reveal">
+      <div class="info-col">
+        <div class="info-label">Dirección</div>
+        <div class="info-value">
+          Carrer Ca Juliet, 3<br>Picassent (Valencia)
+          <small><a href="https://maps.app.goo.gl/3L41jW8YVRDqntDj8" target="_blank" rel="noopener" style="color:var(--saffron); text-decoration:none;">Ver en el mapa →</a></small>
+        </div>
+      </div>
+      <div class="info-col">
+        <div class="info-label">Teléfonos</div>
+        <div class="info-value">
+          <a href="tel:+34961230537">+34 961 230 537</a><br>
+          <a href="tel:+34666466091">+34 666 466 091</a>
+        </div>
+      </div>
+      <div class="info-col">
+        <div class="info-label">Horario</div>
+        <div class="info-value">
+          Lunes a domingo<br>13:30 a 15:30h
+          <small>De 10h a 18h teléfono abierto para reservas. Encargo de paellas y arroces a la leña todos los días hasta las 15:30h.</small>
+        </div>
+      </div>
+      <div class="info-col">
+        <div class="info-label">Para llevar</div>
+        <div class="info-value">
+          <a href="tel:+34961230537">+34 961 230 537</a><br>
+          <a href="tel:+34666466091">+34 666 466 091</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">L<span class="ital">'</span>Alter</div>
+  <div class="footer-tag">De Picassent al món · Desde 1967</div>
+  <div class="footer-bottom">
+    <div>© <span id="year"></span> Restaurant L'Alter. Todos los derechos reservados.</div>
+    <div>
+      <a href="https://restaurantlalter.com/wp-content/uploads/2024/06/aviso-legal.pdf" target="_blank" rel="noopener">Aviso legal</a>
+      <a href="https://restaurantlalter.com/wp-content/uploads/2024/06/politica-de-privacidad.pdf" target="_blank" rel="noopener">Privacidad</a>
+      <a href="https://restaurantlalter.com/politica-de-cookies-ue" target="_blank" rel="noopener">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const mobile = document.getElementById('mobileMenu');
+  toggle.addEventListener('click', () => mobile.classList.toggle('open'));
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobile.classList.remove('open')));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const siblings = Array.from(e.target.parentElement?.children || []).filter(c => c.classList.contains('reveal'));
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('in'), Math.max(0, idx) * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // Counters
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      const plus = el.querySelector('.plus');
+      const dur = 1600;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const v = Math.round(target * eased);
+        el.firstChild.nodeValue = v;
+        if (p < 1) requestAnimationFrame(step);
+        else if (plus) el.appendChild(plus);
+      }
+      if (plus) plus.remove();
+      requestAnimationFrame(step);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num').forEach(el => counterIO.observe(el));
+
+  // Carta tabs
+  const buttons = document.querySelectorAll('.cat-btn');
+  const grids = document.querySelectorAll('[data-content]');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      grids.forEach(g => {
+        if (g.dataset.content === cat) {
+          g.style.display = '';
+          // re-trigger reveal
+          g.querySelectorAll('.reveal').forEach(r => r.classList.remove('in'));
+          requestAnimationFrame(() => g.classList.add('in'));
+        } else {
+          g.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Parallax on hero photo + content
+  const heroBg = document.getElementById('heroBg');
+  const heroInner = document.querySelector('.hero-inner');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (heroBg && !reduceMotion) {
+    let pending = false;
+    window.addEventListener('scroll', () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (y < window.innerHeight * 1.2) {
+          heroBg.style.transform = `translateY(${y * 0.35}px) scale(${1.05 + y * 0.0002})`;
+          if (heroInner) {
+            heroInner.style.transform = `translateY(${y * 0.18}px)`;
+            heroInner.style.opacity = String(Math.max(0, 1 - y / (window.innerHeight * 0.8)));
+          }
+        }
+        pending = false;
+      });
+    }, { passive: true });
+  }
+
+  // Mouse-tracked subtle hero parallax
+  if (heroBg && !reduceMotion && window.matchMedia('(hover:hover)').matches) {
+    document.querySelector('.hero').addEventListener('mousemove', (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      heroBg.style.backgroundPosition = `${50 + px * 4}% ${50 + py * 4}%`;
+    });
+  }
+
+  // Fade-in images when loaded
+  document.querySelectorAll('img').forEach(img => {
+    if (img.complete && img.naturalHeight !== 0) img.classList.add('loaded');
+    else img.addEventListener('load', () => img.classList.add('loaded'));
+    img.addEventListener('error', () => img.classList.add('loaded'));
+  });
+
+  // Gallery items rise on enter viewport (additional stagger)
+  const galIO = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transition = 'opacity 1s ease, transform 1s cubic-bezier(.2,.8,.2,1)';
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, i * 90);
+        galIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.gal-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(40px)';
+    galIO.observe(el);
+  });
+</script>
+
+</body>
+</html>
